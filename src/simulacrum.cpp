@@ -1,4 +1,5 @@
 #include "simulacrum.hpp"
+#include <cmath>
 #include <math.h>
 #include <rclcpp/create_publisher.hpp>
 #include <rclcpp/node.hpp>
@@ -19,8 +20,14 @@ Simulacrum::Simulacrum() : rclcpp::Node("simulacrum") {
 		
 		
 		geometry_msgs::msg::Pose2D k;
-		x= radius*sin(x+this->m_accumulator);
-		y= radius*sin(y+this->m_accumulator)*cos(y+this->m_accumulator);
+		const double x0= radius*sqrt(2)*cos(this->m_accumulator);
+		const double x1= pow(sin(this->m_accumulator),2)+1;
+
+		x= x0/x1; 
+		const double y0= radius*sqrt(2)*cos(this->m_accumulator)*sin(this->m_accumulator);
+		const double y1= pow(cos(this->m_accumulator),2)+1;
+		y= y0/y1;
+	
 		k.x=x;
 		k.y=y;
 		k.theta=0;

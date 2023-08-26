@@ -16,7 +16,7 @@ class Simulacrum : public rclcpp::Node{
 		Simulacrum(); 
 		virtual ~Simulacrum() = default; 
 	private:
-		double m_lacunarity=0.125;
+		double m_lacunarity=0.075;
 		double m_accumulator=0;
 		double x=0;
 		double y=0; 
